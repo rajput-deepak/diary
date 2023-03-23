@@ -1,0 +1,65 @@
+{% extends 'userbase.html' %}
+{% load static %}
+{% block main %}
+        <!-- body ------------------------------------------------>
+
+
+        
+        <div class="main-body">
+            <h1>Manage Category</h1>
+            
+            
+
+            <form method="post" class="style flex_col">
+                {% csrf_token %}
+                <div class="flex_col">
+                    <label class="form-label">Category Name</label>
+                    <input type="text" name="categoryName" placeholder="Enter Category Name"
+                        class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary px-5">Submit</button>
+                </div>
+            </form>
+
+
+            <div class="row style">
+                <table class="table mb-0">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Category Name</th>
+                        <th scope="col">Creation Date</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% for i in category %}
+                    <tr>
+                        <th scope="row">{{forloop.counter}}</th>
+                        <td>{{i.categoryName}}</td>
+                        <td>{{i.CreationDate}}</td>
+                        <td><a href="{% url 'editCategory' i.id %}" class="btn btn-info">Edit</a> |
+                        <a href="{% url 'deleteCategory' i.id %}" onclick="return confirm('Are you sure to Delete')" class="btn btn-danger">Delete</a></td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% if error == "no" %}
+            <script>
+                alert('New Category has been Added.');
+            </script>
+            {% endif %}
+
+            {% if error == "yes" %}
+            <script>
+                alert('Something went Wrong. Try Again...');
+            </script>
+            {% endif %}
+
+
+        </div>
+
+{% endblock %}

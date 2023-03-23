@@ -1,0 +1,36 @@
+{% extends 'userbase.html' %}
+{% load static %}
+{% block main %}
+        <!-- body ------------------------------------------------>
+
+
+
+        <div class="main-body">
+            <h1>Profile</h1>
+
+            <div class="bdy-cnt">
+                <h2>Update Profile</h2>
+                <hr>
+                <form method="post" class="form">
+                            <label class="form-label">First Name</label>
+                            <input type="text" name="firstName" value="{{signup.user.first_name}}" class="form-control">
+
+                            <label class="form-label">Last Name</label>
+                            <input type="text" name="lastName" value="{{signup.user.last_name}}" class="form-control">
+
+                            <label class="form-label">Mobile Number</label>
+                            <input type="text" name="mobileNumber" value="{{signup.mobileNumber}}" maxlength="10" class="form-control" >
+
+                            <label class="form-label">Email Id</label>
+                            <input type="text" class="form-control" value="{{signup.user.username}}" readonly>
+                        
+                            <label class="form-label">Registration Date</label>
+                            <input type="text" class="form-control" value="{{signup.regDate}}" readonly>
+                        
+                        <button type="submit" class="btn btn-primary px-5">Update</button>
+                </form>
+            </div>
+
+        </div>
+
+{% endblock %}

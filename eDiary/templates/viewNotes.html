@@ -1,0 +1,97 @@
+{% extends 'userbase.html' %}
+{% load static %}
+{% block main %}
+        <!-- body ------------------------------------------------>
+
+
+        
+        <div class="main-body">
+            <h1>View Notes</h1>
+
+
+            <div class="row style">
+                <h5>Notes Title</h5>
+                <p>{{notes.noteTitle}}</p>
+
+                <h5>Notes Category</h5>
+                <p>{{notes.category.categoryName}}</p>
+
+                <h5>Notes Creation Date</h5>
+                <p>{{notes.CreationDate}}</p>
+
+                <h5>Notes Details</h5>
+                <p>{{notes.noteDescription}}</p>
+            </div>
+            
+                                        
+            
+            {% comment %} <div class="row style">
+                <table class="table mb-0">
+                    <thead>
+                    <tr>
+                        <th>S No.</th>
+                        <th>Notes Details</th>
+                        <th>Date</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% for i in noteshistory %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{i.noteDetails}}</td>
+                        <td>{{i.postingDate}}</td>
+                        <td><a href="{% url 'deleteNotesHistory' i.id %}" onclick="return confirm('Are you sure to Delete')" class="btn btn-danger">Delete</a></td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div> {% endcomment %}
+                                        
+
+            {% comment %} <div align="center">
+                <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Add
+                    More Notes
+                </button>
+            </div>
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <form method="post" name="takeaction">
+                        {% csrf_token %}
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Add Note Details</h5>
+                            </div>
+                            <div class="modal-body">
+                                <p><textarea class="form-control" name="noteDetails"
+                                placeholder="Enter Note Details" rows="5" required></textarea></p>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-danger" type="button" data-bs-dismiss="modal">Close</button>
+                                <button class="btn btn-primary" type="submit" name="submit">Save changes</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div> {% endcomment %}
+            
+            {% if error == "no" %}
+            <script>
+                alert('Notes Details has been Added.');
+            </script>
+            {% endif %}
+            
+            {% if error == "yes" %}
+            <script>
+                alert('Something went Wrong. Try Again...');
+            </script>
+            {% endif %}
+
+
+
+        </div>
+
+{% endblock %}

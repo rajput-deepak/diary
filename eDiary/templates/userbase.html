@@ -1,0 +1,64 @@
+{% load static %}
+
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Diary</title>
+
+    <!-- icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- style -->
+    <link href="{% static 'css/home-style.css' %}" rel="stylesheet">
+
+    <!-- script -->
+    <script src="{% static 'js/script.js' %}"></script>
+</head>
+<body class="cont-2">
+
+    <!-- navigation bar with responsive to mobile view-->
+    <div class="nav" id="nav">
+        <span class="logo">
+            <i class="fa-solid fa-book"></i>
+            Online Diary
+        </span>
+        <a href="{% url 'user_home' %}">Dashboard</a>
+        <a href="{% url 'manageCategory' %}">Category</a>
+        <a href="{% url 'manageNotes' %}">Notes</a>
+        <a href="{% url 'searchNotes' %}">Search</a>
+        <a href="{% url 'changePassword' %}">Change Password</a>
+        <a href="/logout">Logout</a>
+    </div>
+
+    <!-- main section -->
+    <div class="main">
+
+
+        <!-- header -->
+        <div class="header" title="See Profile">
+            <a class="user" href="{% url 'profile' %}">
+                hii {{request.user.first_name}} {{request.user.last_name}}
+            </a>
+            <a onclick="menu()" class="menu" id="menu">
+                <i class="fa-solid fa-bars"></i>
+            </a>
+        </div>
+
+
+        <!-- body ------------------------------------------------>
+
+        {% block main %}
+
+        {% endblock %}
+
+
+        <!-- footer ---------------------------------------------->
+        <div class="footer">
+            <span>made with ❤️ by KUDRAT KAUR</span>
+        </div>
+    </div>
+</body>
+</html>

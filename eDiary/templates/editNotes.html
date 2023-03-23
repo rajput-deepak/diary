@@ -1,0 +1,60 @@
+{% extends 'userbase.html' %}
+{% load static %}
+{% block main %}
+        <!-- body ------------------------------------------------>
+
+
+        
+        <div class="main-body">
+            <h1>Notes</h1>
+
+
+            <div class="row style">
+                <form method="post" class="column">
+                    {% csrf_token %}
+                    <div class="row2">
+                        <label class="form-label">Category Name</label>
+                        <select name="category" class="form-control" required>
+                            <option value="{{notes.category.id}}">{{notes.category.categoryName}}</option>
+                            {% for i in category %}
+                            <option value="{{i.id}}">{{i.categoryName}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="row2">
+                        <label class="form-label">Notes Title</label>
+                        <input type="text" name="noteTitle" class="form-control" value="{{notes.noteTitle}}">
+                    </div>
+                    <div class="row2">
+                        <label class="form-label">Notes Description</label>
+                        <textarea name="noteDescription"
+                                  class="form-control">{{notes.noteDescription}}</textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-primary px-5">Update</button>
+                    </div>
+                </form>
+            </div>
+            
+                                        
+            
+            {% if error == "no" %}
+            <script>
+                alert('Notes has been Updated.');
+                window.location=('{% url 'manageNotes' %}');
+            </script>
+            {% endif %}
+            
+            {% if error == "yes" %}
+            <script>
+                alert('Something went Wrong. Try Again...');
+            
+            </script>
+            {% endif %}
+
+
+
+        </div>
+
+{% endblock %}

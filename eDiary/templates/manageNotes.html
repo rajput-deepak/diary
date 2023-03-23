@@ -1,0 +1,119 @@
+{% extends 'userbase.html' %}
+{% load static %}
+{% block main %}
+
+        <!-- body ------------------------------------------------>
+
+
+        
+        <div class="main-body">
+            <h1>Manage Notes</h1>
+
+            <div class="row style column">
+                <form method="post" class="column">
+                    {% csrf_token %}
+                    <div class="row2">
+                        <label class="form-label">Category Name</label>
+                        <select name="category" class="form-control" required>
+                            <option value="">Select Category</option>
+                            {% for i in category %}
+                            <option value="{{i.id}}">{{i.categoryName}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                        
+                    <div class="row2">
+                        <label>Notes Title</label>
+                        <input type="text" name="noteTitle" placeholder="Enter Notes Title" class="form-control" required>
+                    </div>
+
+                    <div class="row2">
+                        <label class="form-label">Notes Description</label>
+                        <textarea name="noteDescription" placeholder="Enter Notes Description"
+                    class="form-control" required></textarea>
+                    </div>
+                    
+
+                    <button type="submit" class="btn btn-primary px-5">Submit</button>
+                </form>
+            </div>
+
+            {% comment %} <div class="row style">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label class="form-label">Category Name</label>
+                        <select name="category" class="form-control" required>
+                            <option value="">Select Category</option>
+                            {% for i in category %}
+                            <option value="{{i.id}}">{{i.categoryName}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Notes Title</label>
+                        <input type="text" name="noteTitle" placeholder="Enter Notes Title"
+                            class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Notes Description</label>
+                        <textarea name="noteDescription" placeholder="Enter Notes Description"
+                                class="form-control" required></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-primary px-5">Submit</button>
+                    </div>
+                </form>
+            </div> {% endcomment %}
+
+            <div class="row style">
+                <table class="table mb-0">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Notes Title</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Creation Date</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% for i in notes %}
+                    <tr>
+                        <th scope="row">{{forloop.counter}}</th>
+                        <td>{{i.noteTitle}}</td>
+                        <td>{{i.category.categoryName}}</td>
+                        <td>{{i.CreationDate}}</td>
+                        <td><a href="{% url 'editNotes' i.id %}" class="btn btn-info">Edit</a> |
+                            <a href="{% url 'viewNotes' i.id %}" class="btn btn-success">View</a> |<a href="{% url 'deleteNotes' i.id %}"
+                               onclick="return confirm('Are you sure to Delete')" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+                                        
+            
+            {% if error == "no" %}
+            <script>
+                alert('New Notes has been Added.');
+            
+            </script>
+            {% endif %}
+            
+            {% if error == "yes" %}
+            <script>
+                alert('Something went Wrong. Try Again...');
+            
+            </script>
+            {% endif %}
+
+
+
+        </div>
+
+{% endblock %}

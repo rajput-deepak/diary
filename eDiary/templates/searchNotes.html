@@ -1,0 +1,69 @@
+{% extends 'userbase.html' %}
+{% load static %}
+{% block main %}
+        <!-- body ------------------------------------------------>
+
+
+        
+        <div class="main-body">
+            <h1>Search Notes</h1>
+
+            <div class="row style">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="flex_col">
+                        <label class="form-label">Search By Notes title</label>
+                        <input type="text" name="search" placeholder="Enter Notes Title"
+                            class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-primary px-5">Search</button>
+                    </div>
+                </form>
+            </div>
+
+
+            <div class="row style">
+                {% if notes %}
+
+                <div class="table-responsive">
+                    <table class="table mb-0">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Notes Title</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Creation Date</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        {% for i in notes %}
+                        <tr>
+                            <th scope="row">{{forloop.counter}}</th>
+                            <td>{{i.noteTitle}}</td>
+                            <td>{{i.category.categoryName}}</td>
+                            <td>{{i.CreationDate}}</td>
+                            <td><a href="{% url 'viewNotes' i.id %}" class="btn btn-success">View</a></td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                                    
+                {% endif %}
+            </div>
+
+                                        
+
+                                    
+
+
+
+
+
+
+        </div>
+
+{% endblock %}
